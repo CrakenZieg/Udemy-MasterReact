@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Gestion } from './components/Gestion'
 
 function App() {
   return (
