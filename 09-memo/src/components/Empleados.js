@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 
-export const Empleados = memo(({page = 1}) => {
+export const Empleados = memo(({page = 1, mensaje}) => {
 
     const [lista, setLista] = useState([])
 
@@ -8,15 +8,19 @@ export const Empleados = memo(({page = 1}) => {
         usersFetch(page);
     },[page])
 
-    const usersFetch = async(page) => {
+    useEffect(()=>{
+        console.log("Lista de empleados actualizada");
+    },[lista])
 
+    const usersFetch = async(page) => {
         console.log("Haciendo fetch")
         const url = `https://reqres.in/api/users?page=${page}`;
         const req = await fetch(url);
         const {data:lista} = await req.json(); 
         setLista(lista);
-
     }
+
+    mensaje();
 
   return (
     <div>

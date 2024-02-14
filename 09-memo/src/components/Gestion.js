@@ -1,5 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { Empleados } from './Empleados'
+import { Tareas } from './Tareas'
+
 
 export const Gestion = () => {
 
@@ -11,14 +13,24 @@ export const Gestion = () => {
         setNombre(gestorInput.current.value);
     }
 
+    useEffect(()=>{
+        console.log("Vista de gestión actualizada");
+    },[nombre, page]);
+
+    
+    const mensaje = useCallback(() => {
+        console.log("mensaje!");
+    },[page]);
+
     return (
-        <div>
+        <div className='gestion'>
             <h1>Gestor: {nombre}</h1>
             <input type="text" ref={gestorInput} onChange={asign} />
             <h2>Listado de empleados:</h2>
             <button onClick={()=>{setPage(1)}}>1</button>
             <button onClick={()=>{setPage(2)}}>2</button>
-            <Empleados page={page}/>
+            <Empleados page={page} mensaje={mensaje} />
+            <Tareas/>
         </div>
     )
 }
